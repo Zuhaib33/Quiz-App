@@ -151,7 +151,7 @@ let input = document.querySelectorAll("input");
 let index = 0;
 //  for (let i=0; index<questionData.length; i++){
 let putData = () => {
-  question.innerHTML = `${index+1}) ${questionData[index].question}`;
+  question.innerHTML = `${index + 1}) ${questionData[index].question}`;
   answers[0].innerHTML = questionData[index].a;
   answers[1].innerHTML = questionData[index].b;
   answers[2].innerHTML = questionData[index].c;
@@ -161,76 +161,69 @@ let putData = () => {
   input[1].value = questionData[index].b;
   input[2].value = questionData[index].c;
   input[3].value = questionData[index].d;
-
 };
 putData();
-
-
 
 let submit = () => {
   let uerans = document.querySelector("input:checked").value;
   let corret = questionData[index].correctAnswer;
-  let chkans=document.getElementById("chkans");
-  let checked=document.getElementsByClassName("option")
+  let chkans = document.getElementById("chkans");
+  let options = document.querySelectorAll(".options");
   if (uerans === corret) {
-    
-    chkans.innerHTML="Correct Answer"
+    chkans.innerHTML = "Correct Answer";
     chkans.style.color = "green";
     console.log("right");
-    
     right++;
     let a = `Right Answer =${right} of ${total}`;
     document.getElementById("right").innerText = a;
-
   } else {
     console.log("wrong");
-     chkans.innerHTML="Wrong Answer"
-     chkans.style.color = "red";
-  wrong++;
-}
-  input:checked = false;
+    chkans.innerHTML = "Wrong Answer";
+    chkans.style.color = "red";
+    wrong++;
+  }
+  for ( option of options) {
+    option.checked = false;
+  }
   index++;
-  
   if (index > questionData.length - 1) {
     console.log("Quiz end");
-    let box= document.querySelector("#box");
-   box.style.display="none";
+    let box = document.querySelector("#box");
+    box.style.display = "none";
 
-  // this show the results
-    let end=document.querySelector(".results");
+    // this show the results
+    let end = document.querySelector(".results");
     end.classList.remove("results");
-    let li=document.querySelectorAll("li");
-    li[0].innerText=`Total Number of Questions= ${total}`
-    li[1].innerText=`Total Number of Right Answer= ${right}`
-    li[2].innerText=`Total Number of Wrong Answer= ${wrong}`
-
-
-    } 
-  else {
+    let li = document.querySelectorAll("li");
+    li[0].innerText = `Total Number of Questions= ${total}`;
+    li[1].innerText = `Total Number of Right Answer= ${right}`;
+    li[2].innerText = `Total Number of Wrong Answer= ${wrong}`;
+  } else {
     putData();
   }
-  
-}
+};
+
 
 let total = questionData.length;
 let right = 0;
-let wrong =0;
+let wrong = 0;
 
 //this answers the question
 
-let pp=document.getElementById('pp');
-let ansList=document.querySelector(".display")
-function allAnswers(){
-    ansList.style.display="none";
-    pp.style.display="inline-block";
-for (let i=0; i<questionData.length; i++) {
-  let qus=document.createElement("li")
-  let ans=document.createElement("p")
-  qus.innerHTML=`${i+1}) ${questionData[i].question}`
-  ans.innerHTML=questionData[i].correctAnswer;
-  pp.appendChild(qus)
-  pp.appendChild(ans)
-  ans.style.color="green"
+let pp = document.getElementById("pp");
+let ansList = document.querySelector(".display");
+function allAnswers() {
+  ansList.style.display = "none";
+  pp.style.display = "inline-block";
+  for (let i = 0; i < questionData.length; i++) {
+    let qus = document.createElement("li");
+    let ans = document.createElement("p");
+    qus.innerHTML = `${i + 1}) ${questionData[i].question}`;
+    ans.innerHTML = questionData[i].correctAnswer;
+    pp.appendChild(qus);
+    pp.appendChild(ans);
+    ans.style.color = "green";
+  }
 }
-}
+
 
